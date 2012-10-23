@@ -1,0 +1,57 @@
+public class ReverseSinglyLinkedList {
+    
+    static class Node {
+        Node next;
+        int item;
+        Node(int item) {
+            this.item = item;
+        }
+        
+        @Override
+        public String toString() {
+            String str = "";
+            Node iterator = this;
+            
+            while (iterator != null) {
+                str += iterator.item;
+                
+                if (iterator.next != null) {
+                    iterator = iterator.next;
+                } else {
+                    break;
+                }
+            }
+            
+            return str;
+        }
+    }
+    
+    static Node reverse(Node head) {        
+        Node previous = null, current = head, forward;
+
+        while (current != null) {
+            forward = current.next;
+            current.next = previous;
+            previous = current;
+            current = forward;
+        }
+        
+        return previous;
+    }
+
+    public static void main(String[] args) {
+        Node a = new Node(1);
+        Node b = new Node(2);
+        Node c = new Node(3);
+        Node d = new Node(4);
+        Node e = new Node(5);
+        
+        a.next = b; b.next = c; c.next = d; d.next = e;
+
+        System.out.println(a);
+        
+        Node result = reverse(a);
+
+        System.out.println(result);
+    }
+}
